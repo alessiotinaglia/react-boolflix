@@ -1,22 +1,10 @@
 
-h1{
-  display: flex;
-  justify-content: center;
-  padding: 15px;
+a{
+  font-size: 2em;
 }
 
-h2{
-  font-size: 4em;
-}
-
-h3{
-  padding: 25px 250px;
-  color: white;
-}
-
-h4{
-  padding: 10px;
-  font-size: 1.3em;
+a{
+  margin-left: 15px;
 }
 
 body{
@@ -29,9 +17,9 @@ body{
 }
 
 header {
-  height: 150px;  
-  padding: 25px;
-  font-size: 1.3em;
+  height: 100px;  
+  padding: 10px;
+  background-color: black;
 }
 
 main{
