@@ -77,12 +77,10 @@ function FilmETelefilm() {
                                     className="card-img-top"
                                     alt={movie.title}
                                 />
-                                <div className="card-body">
-                                    <h5 className="card-title">{movie.title}</h5>
-                                    <p className="card-text">
-                                        {movie.overview || 'Descrizione non disponibile'}
-                                    </p>
-                                </div>
+                                <h5 className="card-title">{movie.title}</h5>
+                                <p className="card-text">
+                                    {movie.overview || 'Descrizione non disponibile'}
+                                </p>
                             </div>
                         </div>
                     ))
@@ -92,7 +90,7 @@ function FilmETelefilm() {
             </div>
 
             <h3 className='p-3 text-white'>Serie TV in evidenza</h3>
-            <div className="row">
+            <div className="row ">
                 {loadingTvShows ? (
                     <div>Caricamento serie TV...</div>
                 ) : tvShows.length > 0 ? (
@@ -104,12 +102,10 @@ function FilmETelefilm() {
                                     className="card-img-top"
                                     alt={tvShow.name}
                                 />
-                                <div className="card-body">
-                                    <h5 className="card-title">{tvShow.name}</h5>
-                                    <p className="card-text">
-                                        {tvShow.overview || 'Descrizione non disponibile'}
-                                    </p>
-                                </div>
+                                <h5 className="card-title">{tvShow.name}</h5>
+                                <p className="card-text">
+                                    {tvShow.overview || 'Descrizione non disponibile'}
+                                </p>
                             </div>
                         </div>
                     ))
