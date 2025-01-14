@@ -10,16 +10,19 @@ function Card() {
     const fetchMovies = async (query) => {
         setLoading(true);
         let url;
-        
+
         if (query == '') {
-            // trending/movie/week?language=en-US
-            url = `https://api.themoviedb.org/3/trending/movie/week?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT`;
+            url = `https://api.themoviedb.org/3/trending/movie/week`;
         } else {
-            url = `https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT&query=${query}`;
+            url = `https://api.themoviedb.org/3/search/movie`;
         }
         
         try {
-            const response = await axios.get(url);
+            const response = await axios.get(url, {params: {
+                api_key: 'e99307154c6dfb0b4750f6603256716d',
+                language: 'it-IT',
+                query
+            }});
             setMovies(response.data.results);
         } catch (error) {
             console.error('Errore durante il recupero dei film:', error);
