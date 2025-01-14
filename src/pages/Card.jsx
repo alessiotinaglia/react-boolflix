@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios'; // Importa axios
 
 function Card() {
     const [movies, setMovies] = useState([]);
@@ -7,18 +8,17 @@ function Card() {
         const fetchMovies = () => {
             const url = 'https://api.themoviedb.org/3/discover/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT';
 
-            fetch(url)
-                .then((response) => response.json())
-                .then((data) => {
-                    setMovies(data.results);
+            axios.get(url)
+                .then((response) => {
+                    setMovies(response.data.results);
                 })
                 .catch((error) => {
-                    console.error('Errore durante il recupero dei film:', error);
+                    console.error('Errore durante il recupero dei film:', error); 
                 });
         };
 
         fetchMovies();
-    }, []);
+    }, []); 
 
     return (
         <section className="m-20 p-5 mr-5">
