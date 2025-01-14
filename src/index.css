@@ -20,7 +20,6 @@ header {
   height: 100px;  
   padding: 10px;
   background-color: black;
-  margin-bottom: 50px;
 }
 
 main{
@@ -39,3 +38,11 @@ footer {
   text-align: center;
   z-index: 1000; 
 }
+
+
+.card{
+  aspect-ratio: 16/9;
+}
+
+
+
