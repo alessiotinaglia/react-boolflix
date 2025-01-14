@@ -1,13 +1,23 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useGlobalContext } from '../context/GlobalContext';
 
-function Card({ query }) {
+function Card() {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { query } = useGlobalContext();
 
     const fetchMovies = async (query) => {
         setLoading(true);
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT&query=${query}`;
+        let url;
+        
+        if (query == '') {
+            // trending/movie/week?language=en-US
+            url = `https://api.themoviedb.org/3/trending/movie/week?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT`;
+        } else {
+            url = `https://api.themoviedb.org/3/search/movie?api_key=e99307154c6dfb0b4750f6603256716d&language=it-IT&query=${query}`;
+        }
+        
         try {
             const response = await axios.get(url);
             setMovies(response.data.results);
@@ -19,9 +29,7 @@ function Card({ query }) {
     };
 
     useEffect(() => {
-        if (query) {
-            fetchMovies(query);
-        }
+        fetchMovies(query);
     }, [query]);
 
     return (

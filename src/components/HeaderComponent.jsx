@@ -15,7 +15,7 @@ function Header({ onSearch }) {
                         <li className="nav-item"><a className="nav-link text-white" href="#contact">Film</a></li>
                         <li className="nav-item"><a className="nav-link text-white" href="#contact">La mia lista</a></li>
                     </ul>
-                    <SearchBar onSearch={onSearch} />
+                    <SearchBar />
                 </div>
             </nav>
         </header>

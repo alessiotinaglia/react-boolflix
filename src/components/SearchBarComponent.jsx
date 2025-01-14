@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { useGlobalContext } from '../context/GlobalContext';
 
-function SearchBar({ onSearch }) {
-    const [query, setQuery] = useState("");
+function SearchBar() {
+    const { query, setQuery } = useGlobalContext();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (query.trim() !== "") {
-            onSearch(query);
+            setQuery(query);
         }
     };
 
