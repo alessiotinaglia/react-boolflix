@@ -6,7 +6,7 @@ function SearchBar() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (query.trim() !== "") {
-            setQuery(query);
+            setQuery(query); 
         }
     };
 
@@ -15,7 +15,7 @@ function SearchBar() {
             <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search for a movie"
+                placeholder="Cerca un film o una serie TV"
                 aria-label="Search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

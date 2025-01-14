@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Film from './pages/Film';
 import DefaultLayout from './pages/DefaultLayout';
 import { GlobalProvider } from './context/GlobalContext';
+import FilmETelefilm from './pages/Film';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DefaultLayout />}>
-          <Route path="/" element={<Film />} />
+            <Route index element={<FilmETelefilm />} />
           </Route>
         </Routes>
       </BrowserRouter>
