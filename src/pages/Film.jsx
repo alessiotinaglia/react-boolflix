@@ -9,6 +9,9 @@ function FilmETelefilm() {
     const [loadingTvShows, setLoadingTvShows] = useState(false);
     const { query } = useGlobalContext();
 
+    // Stato per la card selezionata
+    const [selectedCard, setSelectedCard] = useState(null);
+
     const fetchMovies = async (query = '') => {
         setLoadingMovies(true);
         let url = `https://api.themoviedb.org/3/trending/movie/week`;
@@ -62,8 +65,24 @@ function FilmETelefilm() {
         fetchTvShows(query);
     }, [query]);
 
+    const closeOverlay = () => setSelectedCard(null);
+
     return (
         <section className='p-5'>
+            {selectedCard && (
+                <div className="overlay" onClick={closeOverlay}>
+                    <div className="overlay-content">
+                        <img
+                            src={`https://image.tmdb.org/t/p/w500${selectedCard.poster_path}`}
+                            alt={selectedCard.title || selectedCard.name}
+                            className="img-fluid"
+                        />
+                        <h5>{selectedCard.title || selectedCard.name}</h5>
+                        <p>{selectedCard.overview || 'Descrizione non disponibile'}</p>
+                    </div>
+                </div>
+            )}
+
             <h3 className='p-3 text-white'>Film in evidenza</h3>
             <div className="row">
                 {loadingMovies ? (
@@ -71,16 +90,20 @@ function FilmETelefilm() {
                 ) : movies.length > 0 ? (
                     movies.map((movie) => (
                         <div className="col-md-2" key={movie.id}>
-                            <div className="card m-3 movie-card" style={{ width: '18rem' }}>
+                            <div
+                                className="card m-3 movie-card"
+                                style={{ width: '18rem' }}
+                                onClick={() => setSelectedCard(movie)}
+                            >
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                     className="card-img-top"
                                     alt={movie.title}
-                                />
-                                <h5 className="card-title">{movie.title}</h5>
-                                <p className="card-text">
-                                    {movie.overview || 'Descrizione non disponibile'}
-                                </p>
+                                />                                
+                                    <h5 className="card-title">{movie.title}</h5>
+                                    <p className="card-text">
+                                        {movie.overview || 'Descrizione non disponibile'}
+                                    </p>                             
                             </div>
                         </div>
                     ))
@@ -90,22 +113,26 @@ function FilmETelefilm() {
             </div>
 
             <h3 className='p-3 text-white'>Serie TV in evidenza</h3>
-            <div className="row ">
+            <div className="row">
                 {loadingTvShows ? (
                     <div>Caricamento serie TV...</div>
                 ) : tvShows.length > 0 ? (
                     tvShows.map((tvShow) => (
                         <div className="col-md-2" key={tvShow.id}>
-                            <div className="card m-3 movie-card" style={{ width: '18rem' }}>
+                            <div
+                                className="card m-3 movie-card"
+                                style={{ width: '18rem' }}
+                                onClick={() => setSelectedCard(tvShow)}
+                            >
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`}
                                     className="card-img-top"
                                     alt={tvShow.name}
-                                />
-                                <h5 className="card-title">{tvShow.name}</h5>
-                                <p className="card-text">
-                                    {tvShow.overview || 'Descrizione non disponibile'}
-                                </p>
+                                />                                
+                                    <h5 className="card-title">{tvShow.name}</h5>
+                                    <p className="card-text">
+                                        {tvShow.overview || 'Descrizione non disponibile'}
+                                    </p>                               
                             </div>
                         </div>
                     ))
