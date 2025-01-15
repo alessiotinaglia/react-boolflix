@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useGlobalContext } from '../context/GlobalContext';
 import { FaStar, FaRegStar, FaPlay } from 'react-icons/fa';
 import Flag from 'react-world-flags';
-import Carousel from '../components/CaruselComponent';
+
 
 function FilmETelefilm() {
     const [movies, setMovies] = useState([]);

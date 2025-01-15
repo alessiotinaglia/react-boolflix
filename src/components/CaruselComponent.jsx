@@ -1,2 +1,0 @@
-
-import './Carousel.css';  
