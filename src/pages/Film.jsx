@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useGlobalContext } from '../context/GlobalContext';
+import { FaStar, FaRegStar, FaPlay } from 'react-icons/fa';
+import Flag from 'react-world-flags';
+import Carousel from '../components/CaruselComponent';
 
 function FilmETelefilm() {
     const [movies, setMovies] = useState([]);
@@ -9,7 +12,6 @@ function FilmETelefilm() {
     const [loadingTvShows, setLoadingTvShows] = useState(false);
     const { query } = useGlobalContext();
 
-    // Stato per la card selezionata
     const [selectedCard, setSelectedCard] = useState(null);
 
     const fetchMovies = async (query = '') => {
@@ -67,18 +69,55 @@ function FilmETelefilm() {
 
     const closeOverlay = () => setSelectedCard(null);
 
+    // Stelline voto
+    const drawStars = (voteAverage) => {
+        const totalStars = 5;
+        const stars = [];
+        const filledStars = Math.ceil(voteAverage / 2);
+
+        for (let i = 1; i <= totalStars; i++) {
+            if (i <= filledStars) {
+                stars.push(<FaStar key={i} />);
+            } else {
+                stars.push(<FaRegStar key={i} />);
+            }
+        }
+
+        return stars;
+    };
+
+    const languageToCountryCode = {
+        en: 'US',
+        it: 'IT',
+        fr: 'FR',
+        de: 'DE',
+        es: 'ES',
+    };
+
+    const getCountryCode = (languageCode) => {
+        return languageToCountryCode[languageCode.toLowerCase()] || 'US';
+    };
+
     return (
         <section className='p-5'>
             {selectedCard && (
                 <div className="overlay" onClick={closeOverlay}>
                     <div className="overlay-content">
+                        <div className="play-icon-container">
+                            <FaPlay className="play-icon" />
+                        </div>
                         <img
                             src={`https://image.tmdb.org/t/p/w500${selectedCard.poster_path}`}
                             alt={selectedCard.title || selectedCard.name}
-                            className="img-fluid"
                         />
-                        <h5>{selectedCard.title || selectedCard.name}</h5>
-                        <p>{selectedCard.overview || 'Descrizione non disponibile'}</p>
+                        <div className='text'>
+                            <h5><strong>Titolo: </strong>{selectedCard.title || selectedCard.name}</h5>
+                            <p><strong>Descrizione: </strong>{selectedCard.overview || 'Descrizione non disponibile'}</p>
+                            <p><strong>Paese: </strong><Flag code={getCountryCode(selectedCard.original_language)} style={{ width: 30, height: 20, marginLeft: '10px' }} /></p>
+                            <div className='stars'>
+                                <p><strong>Voto: </strong><span className="stars-container">{drawStars(selectedCard.vote_average)}</span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
@@ -95,15 +134,24 @@ function FilmETelefilm() {
                                 style={{ width: '18rem' }}
                                 onClick={() => setSelectedCard(movie)}
                             >
+                                <div className="play-container">
+                                    <FaPlay className="play-icon" />
+                                </div>
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                     className="card-img-top"
                                     alt={movie.title}
-                                />                                
-                                    <h5 className="card-title">{movie.title}</h5>
-                                    <p className="card-text">
-                                        {movie.overview || 'Descrizione non disponibile'}
-                                    </p>                             
+                                />
+                                <h5 className="card-title">{movie.title}</h5>
+                                <p className="card-text">
+                                    {movie.overview || 'Descrizione non disponibile'}
+                                </p>
+                                <p className="card-text">
+                                    <strong>Paese: </strong><Flag code={getCountryCode(movie.original_language)} style={{ width: 30, height: 20, marginLeft: '10px' }} />
+                                </p>
+                                <p className="card-text">
+                                    <strong>Voto:</strong> {drawStars(movie.vote_average)}
+                                </p>
                             </div>
                         </div>
                     ))
@@ -124,15 +172,24 @@ function FilmETelefilm() {
                                 style={{ width: '18rem' }}
                                 onClick={() => setSelectedCard(tvShow)}
                             >
+                                <div className="play-container">
+                                    <FaPlay className="play-icon" />
+                                </div>
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`}
                                     className="card-img-top"
                                     alt={tvShow.name}
-                                />                                
-                                    <h5 className="card-title">{tvShow.name}</h5>
-                                    <p className="card-text">
-                                        {tvShow.overview || 'Descrizione non disponibile'}
-                                    </p>                               
+                                />
+                                <h5 className="card-title">{tvShow.name}</h5>
+                                <p className="card-text">
+                                    {tvShow.overview || 'Descrizione non disponibile'}
+                                </p>
+                                <p className="card-text">
+                                    <strong>Paese: </strong><Flag code={getCountryCode(tvShow.original_language)} style={{ width: 30, height: 20, marginLeft: '10px' }} />
+                                </p>
+                                <p className="card-text">
+                                    <strong>Voto:</strong> {drawStars(tvShow.vote_average)}
+                                </p>
                             </div>
                         </div>
                     ))

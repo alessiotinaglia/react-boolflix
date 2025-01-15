@@ -40,7 +40,7 @@ footer {
 
 .movie-card {
   position: relative;
-  transition: transform 0.3s ease, height 0.3s ease;
+  transition: transform 0.3s ease;
   overflow: hidden;
   cursor: pointer;
   background-color: black;
@@ -64,7 +64,7 @@ footer {
   left: 0;
   margin-bottom: 0;
   visibility: hidden;
-  transition: bottom 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -103,16 +103,18 @@ footer {
 
 .overlay-content {
   background: black;
-  padding: 20px;
   border-radius: 25px;
-  text-align: center;
-  width: 500px;
+  width: 900px;
   height: auto;
   overflow-y: auto;
   position: relative;
   color: white;
+  display: flex;
 }
 
+.text {
+  padding: 15px;
+}
 
 .overlay .close-btn {
   position: absolute;
@@ -131,7 +133,6 @@ footer {
   width: 100%;
   max-width: 300px;
   height: auto;
-  margin-bottom: 20px;
   border-radius: 15px;
 }
 
@@ -152,3 +153,52 @@ footer {
 .overlay:hover {
   cursor: pointer;
 }
+
+.stars-container {
+  align-items: center;
+  color: red;
+  padding: 5px;
+  font-size: 1.5em;
+}
+
+/* PLAY */
+
+.play-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-icon-container {
+  position: absolute;
+  top: 53%;
+  left: 17%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-icon {
+  color: white;
+  font-size: 50px;
+  padding-left: 5px;
+}
+
+
+.play-icon {
+  color: white;
+  font-size: 30px;
+}
+
+
